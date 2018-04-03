@@ -4,7 +4,7 @@ import java.util.Stack;
 
 public class BracketMatcher {
 
-    private static Stack<Character> stack = new Stack<>();
+    private static Stack<Character> stack = new Stack<Character>();
 
     public static void main(String[] args) {
 

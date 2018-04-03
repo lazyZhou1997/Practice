@@ -3,8 +3,8 @@ public class Sort {
     public static void main(String[] args) {
 
         int maxSize = 19;
+//        int[] nums = {8, 88, 72, 48, 11, 8, 52, 85, 73, 56, 9, 79, 52, 57, 69, 52, 62, 98, 61};
         int[] nums = new int[maxSize];
-
         for (int i = 0; i < maxSize; i++) {
             nums[i] = (int) (Math.random() * 99);
         }
@@ -134,15 +134,17 @@ public class Sort {
         int temp;
 
         while (true) {
+            //start不为等于，保证start结束时位于右边元素的最左边
             while (start < right && nums[start] < nums[right]) {
                 start++;
             }
 
-            while (end > left && nums[end] > nums[right]) {
+            //end为等于，保证start和end相同的时候也能交换
+            while (end > left && nums[end] >= nums[right]) {
                 end--;
             }
 
-            if (left > right) {//划分结束时的时候交换
+            if (start >= end) {//划分结束时的时候交换
 
                 temp = nums[right];
                 nums[right] = nums[start];

@@ -1,93 +1,77 @@
+import javax.sound.sampled.Line;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
+
+/**
+ * 用于记录应用信息
+ */
+class App implements Comparable {
+    int rank;//排名
+    int stream;//流量
+    int money;//金钱
+
+    public int compareTo(Object o) {
+        App app = (App) o;
+
+        double q1 = this.stream * 1.0 / this.money;
+        double q2 = app.stream * 1.0 / app.money;
+
+        if (q1 > q2) {
+            return 1;
+        } else if (q1 < q2) {
+            return -1;
+        } else {
+            return 0;
+        }
+    }
+}
 
 public class Main {
     public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
 
-        Scanner scanner = new Scanner(System.in);
+        int allSteam = in.nextInt();//获取拥有的流量
+        String line = in.nextLine();
+        Scanner scanner = new Scanner(line);
+        //保存应用
+        ArrayList<App> appList = new ArrayList(16);
 
-        String s = scanner.next();
-
-        StringBuilder stringBuilder = new StringBuilder(s);
-
-        int count = 0;
-        int temp = -1;
-        while (count<2) {
-
-
-            if (-1 == (temp = stringBuilder.indexOf("1"))){
-                System.out.println(count*10*1+1);
-                return;
-            }else {
-                stringBuilder.delete(temp,temp);
-            }
-
-            if (-1 == (temp = stringBuilder.indexOf("2"))){
-                System.out.println(count*10*2+2);
-                return;
-            }else {
-                stringBuilder.delete(temp,temp);
-            }
-
-            if (-1 == (temp = stringBuilder.indexOf("3"))){
-                System.out.println(count*10*3+3);
-                return;
-            }else {
-                stringBuilder.delete(temp,temp);
-            }
-
-            if (-1 == (temp = stringBuilder.indexOf("4"))){
-                System.out.println(count*10*4+4);
-                return;
-            }else {
-                stringBuilder.delete(temp,temp);
-            }
-
-            if (-1 == (temp = stringBuilder.indexOf("5"))){
-                System.out.println(count*10*5+5);
-                return;
-            }else {
-                stringBuilder.delete(temp,temp);
-            }
-
-            if (-1 == (temp = stringBuilder.indexOf("6"))){
-                System.out.println(count*10*6+6);
-                return;
-            }else {
-                stringBuilder.delete(temp,temp);
-            }
-            if (-1 == (temp = stringBuilder.indexOf("7"))){
-                System.out.println(count*10*7+7);
-                return;
-            }else {
-                stringBuilder.delete(temp,temp);
-            }
-            if (-1 == (temp = stringBuilder.indexOf("8"))){
-                System.out.println(count*10*8+8);
-                return;
-            }else {
-                stringBuilder.delete(temp,temp);
-            }
-            if (-1 == (temp = stringBuilder.indexOf("9"))){
-                System.out.println(count*10*9+9);
-                return;
-            }else {
-                stringBuilder.delete(temp,temp);
-            }
-            if (-1 == (temp = stringBuilder.indexOf("0"))){
-                if (count>0){
-                    System.out.println(100);
-                }else {
-                    System.out.println(10);
-                }
-                return;
-            }else {
-                stringBuilder.delete(temp,temp);
-            }
-
-            count++;
+        //获取流量和应用数目
+        App app;
+        while (scanner.hasNextInt()) {
+            app = new App();
+            app.stream = scanner.nextInt();
+            appList.add(app);
         }
+        scanner.close();
 
+        //获取应用对应的金币
+        int length = appList.size();
+        for (int i = 0; i < length; i++) {
+            app = appList.get(i);
+            app.rank = i;
+            app.money = in.nextInt();
 
+        }
+        in.close();
+
+        //按所需流量与金币的比从小到大排序
+        Collections.sort(appList);
+
+        int[] maxIndex = new int[2];
+        int maxValue = Integer.MIN_VALUE;
+        int totalSteam = 0;
+        int totalMoney = 0;
+        for (int i = 0; i < length; i++) {
+
+            app = appList.get(i);
+            totalSteam = app.stream;
+            totalMoney = app.money;
+            while (totalSteam <= allSteam) {
+
+            }
+        }
     }
 
 }
