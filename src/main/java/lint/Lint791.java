@@ -1,3 +1,5 @@
+package lint;
+
 import java.util.Arrays;
 
 public class Lint791 {

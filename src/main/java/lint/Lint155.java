@@ -1,3 +1,5 @@
+package lint;
+
 public class Lint155 {
 
     public int minDepth(TreeNode root) {
