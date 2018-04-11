@@ -1,57 +1,47 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
+        String s = in.next();
 
-        int K = in.nextInt();
-        int A = in.nextInt();
-        int X = in.nextInt();
-        int B = in.nextInt();
-        int Y = in.nextInt();
+        int length = s.length();
+        HashMap<Character, Integer> map = new HashMap<>();
+        char c;
 
-        long count = 0;
-        int temp;
+        for (int i = 0; i < length; i++) {
+            c = s.charAt(i);
+            if (map.containsKey(c)) {
+                map.put(c, map.get(c) + 1);
+            } else {
+                map.put(c, 1);
+            }
+        }
 
-        for (int i = 0; i <= X; i++) {
-
-            for (int j = 0; j <= Y; j++) {
-
-                temp = i * A + j * B;
-                if (temp == K) {
-                    count += zuhe(X, i) * zuhe(Y, j);
-                    System.out.println(count);
-                    count %= 1000000007;
-                } else if (temp > K) {
-                    break;
+        long result = 0;
+        for (Integer count :
+                map.values()) {
+            if (1 == count) {
+                result++;
+            } else {
+                for (int j = 1; j <= count; j++) {
+                    result+=zuhe(count,j);
                 }
             }
         }
 
-        System.out.println(count % 1000000007);
-
+        System.out.println(result);
     }
 
 
-    /**
-     * 求组合
-     *
-     * @param total
-     * @param num
-     * @return
-     */
     public static long zuhe(int total, int num) {
 
-        int temp = Math.max(num, total - num);
-        if (temp == total) {
-            return 1;
+        int result = 1;
+        num = Math.max(num, total - num);
+        for (int i = num + 1; i <= total; i++) {
+            result *= i;
         }
 
-        long result = 1;
-        for (int i = temp + 1; i <= total; i++) {
-            result *= i;
-            result %= 1000000007;
-        }
         return result;
     }
 }
