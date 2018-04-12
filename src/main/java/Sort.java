@@ -4,10 +4,11 @@ public class Sort {
 
         int maxSize = 19;
 //        int[] nums = {8, 88, 72, 48, 11, 8, 52, 85, 73, 56, 9, 79, 52, 57, 69, 52, 62, 98, 61};
-        int[] nums = new int[maxSize];
-        for (int i = 0; i < maxSize; i++) {
-            nums[i] = (int) (Math.random() * 99);
-        }
+        int[] nums = {20, 4, 35, 2, 37};
+//        int[] nums = new int[maxSize];
+//        for (int i = 0; i < maxSize; i++) {
+//            nums[i] = (int) (Math.random() * 99);
+//        }
 
 
         System.out.println("排序之前：");
@@ -15,8 +16,8 @@ public class Sort {
 
 //        insertSort(nums);
 //        bubbleSort(nums);
-//        selectSort(nums);
-        quickSort(nums, 0, nums.length - 1);
+        selectSort(nums);
+//        quickSort(nums, 0, nums.length - 1);
         System.out.println("排序之后：");
         display(nums);
 
@@ -39,14 +40,15 @@ public class Sort {
      */
     public static void insertSort(int[] nums) {
 
-        int length = nums.length;
         int temp;
         int index;
+        int length = nums.length;
 
         for (int i = 1; i < length; i++) {
 
             temp = nums[i];
             index = i;
+
             for (int j = i; j > 0; j--) {
 
                 if (nums[j - 1] > temp) {
@@ -59,6 +61,7 @@ public class Sort {
 
             nums[index] = temp;
         }
+
     }
 
     /**
@@ -94,24 +97,26 @@ public class Sort {
     public static void selectSort(int[] nums) {
 
         int length = nums.length;
-        int temp;
+        int min;
         int index;
 
-        for (int i = 0; i < length; i++) {
+        for (int i = 0; i < length - 1; i++) {
 
-            temp = nums[i];
+            min = nums[i];
             index = i;
-            for (int j = i; j < length; j++) {
 
-                if (temp > nums[j]) {
+            for (int j = i + 1; j < length; j++) {
+
+                if (min > nums[j]) {
+                    min = nums[j];
                     index = j;
-                    temp = nums[j];
                 }
             }
-
             nums[index] = nums[i];
-            nums[i] = temp;
+            nums[i] = min;
+
         }
+
     }
 
 
@@ -122,7 +127,7 @@ public class Sort {
      */
     public static void quickSort(int[] nums, int left, int right) {
 
-        if (left > right) {
+        if (left >= right) {
             return;
         }
 
